@@ -5,31 +5,20 @@
     <title>Title</title>
 </head>
 <body>
+    <a href="/"><h1>Главная страница</h1></a>
     <form action="" method="post">{% csrf_token %}
-          <label for="fname">Название: {{ form.title }}</label><br>
-          <input type="text" id="fname" name="fname"><br>
-          <label for="lname">Группа: {{ form.category }}</label><br>
-          <input type="text" id="lname" name="lname"><br>
-          <label for="tname">Количество: {{ form.amount }}</label><br>
-          <input type="text" id="tname" name="tname"><br>
-          <label for="qtname">Номер и дата документа: {{ form.document }}</label><br>
-          <input type="text" id="qtname" name="qtname"><br>
-          <label for="tename">Организация: {{ form.organization }}</label><br>
-          <input type="text" id="tename" name="tename"><br>
-          <label for="tnagme">Стоимость за еденицу: {{ form.price }}</label><br>
-          <input type="text" id="tnagme" name="tnagme"><br>
-          <label for="tnarme">Размер: {{ form.size }}</label><br>
-          <input type="text" id="tnarme" name="tnarme"><br>
-          <label for="tnghame">Ширина: {{ form.width }}</label><br>
-          <input type="text" id="tnghame" name="tnghame"><br>
-          <label for="ghtname">Длина: {{ form.length }}</label><br>
-          <input type="text" id="ghtname" name="ghtname"><br>
-          <label for="tnatyme">Высота: {{ form.height }}</label><br>
-          <input type="text" id="tnatyme" name="tnatyme"><br>
-          <label for="gh">Серийный номер: {{ form.serial }}</label><br>
-          <input type="text" id="gh" name="gh"><br>
-          <label for="tytname">Примечание: {{ form.note }}</label><br>
-          <input type="text" id="tytname" name="tytname"><br>
+          <label>Название: {{ form.title }}</label>
+          <label>Группа: {{ form.category }}</label>
+          <label>Количество: {{ form.amount }}</label><br>
+          <label>Номер и дата документа: {{ form.document }}</label>
+          <label>Организация: {{ form.organization }}</label><br>
+          <label>Стоимость за еденицу: {{ form.price }}</label>
+          <label>Размер: {{ form.size }}</label>
+          <label>Ширина: {{ form.width }}</label>
+          <label>Длина: {{ form.length }}</label>
+          <label>Высота: {{ form.height }}</label>
+          <label>Серийный номер: {{ form.serial }}</label><br>
+          <label>Примечание: {{ form.note }}</label><br>
           <button type="submit">Записать</button>
     </form>
 </body>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Карта МЦ</title>
+</head>
+<body>
+    <a href="/"><h1>Главная страница</h1></a>
+    <form action="" method="post">{% csrf_token %}
+        <h2>Инвентарная карта МЦ. Серия - {{ serial.serial }}</h2>
+        <h4>Наиминование МЦ: {{ serial.title }}</h4>
+        <h4>Вид оборудования: {{ form.view_material }}</h4>
+        <h4>Номер инвентарной карты: {{ form.numb_seral }}</h4>
+        <h4>Стоимость: {{ serial.price }}</h4>
+        <h4>Приянял МЦ: {{ form.face }}</h4>
+        <h4>Срок полезного использования (мес): {{ form.lifetime }}</h4>
+        <h4>Номер и дата документа: {{ serial.document }}</h4>
+        <h4>Размер: {{ serial.size }}</h4>
+        <h4>Ширина: {{ serial.width }}</h4>
+        <h4>Длина: {{ serial.length }}</h4>
+        <h4>Высота: {{ serial.height }}</h4>
+        <h4>Серийный номер: {{ serial.serial }}</h4>
+        <h4>Категория МЦ: {{ serial.category.title }}</h4>
+        <h4>Описание: {{ serial.note }}</h4>
+        <h4>Описание составляющих и характеристик: {{ form.details }}</h4>
+        <h4>Место эксплуатации: {{ form.transfer }}</h4>
+        <h4>Описание работы: {{ form.work }}</h4>
+        <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>

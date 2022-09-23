@@ -2,31 +2,40 @@ from django.db import models
 from tabnanny import check
 from django.db import models
 
-class Material(models.Model):
-    """Мотериальная ценность
-    группа
-    количество
-    намер и дата документа
-    организация
-    стоимость за 1 ед
-    размер ширина длина высота серийный номер
-    примечание
-    индивидуальные характеристики: название количество характеристика
-    сведения о перемещении: вид операици остаточная стоимость МОЛ помещение
-    ремонт\модернизация: вид работ дата описание акт работ"""
+categories = (
+    ('Ценные МЦ', 'Ценные МЦ'),
+    ('Малоценные МЦ', 'Малоценные МЦ'),
+    ('Спецодежда', 'Спецодежда'),
+)
+class Category(models.Model):
+    title = models.CharField(max_length=60, null=False, choices=categories)
 
+    def __str__(self):
+        return self.title
+
+# class Document(models.Model):
+#     title = models.CharField('Название', max_length=100, null=False)
+#     date = models.DateField('Дата')
+#     note = models.TextField('Содержание')
+#
+#     def __str__(self):
+#         return self.title + self.date
+
+class Material(models.Model):
+    """Мотериальная ценность"""
     title = models.CharField("Название", max_length=100)
-    category = models.CharField("Группа",  max_length=20, null=True)
-    amount = models.PositiveIntegerField("Количество", null=True)
-    document = models.CharField("Номер и дата документа",  max_length=100, null=True)
-    organization = models.CharField("Организация",  max_length=50, null=True)
-    price = models.PositiveIntegerField("Стоимость за еденицу", null=True)
-    size = models.CharField("Размер",  max_length=20, null=True)
-    width = models.PositiveIntegerField("Ширина", null=True)
-    length = models.PositiveIntegerField("Длина", null=True)
-    height = models.PositiveIntegerField("Высота", null=True)
-    serial = models.CharField("Серийный номер", max_length=20, null=True)
-    note = models.TextField("Примечание", null=True)
+    category = models.ForeignKey(Category, verbose_name="Группа", null=False, on_delete=models.CASCADE)
+    amount = models.PositiveIntegerField("Количество", null=False)
+    # document = models.ForeignKey(Document, verbose_name="Номер и дата документа", null=False, on_delete=models.CASCADE)
+    document = models.CharField('Документ', max_length=50, null=False)
+    organization = models.CharField("Организация",  max_length=50, null=False)
+    price = models.PositiveIntegerField("Стоимость за еденицу", null=False)
+    size = models.CharField("Размер",  max_length=20, null=False)
+    width = models.PositiveIntegerField("Ширина", null=False)
+    length = models.PositiveIntegerField("Длина", null=False)
+    height = models.PositiveIntegerField("Высота", null=False)
+    serial = models.CharField("Серийный номер", max_length=20, null=False)
+    note = models.TextField("Примечание", null=False)
 
     def __str__(self):
         return self.title
@@ -34,3 +43,17 @@ class Material(models.Model):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товар"
+
+class SerialModel(models.Model):
+    material = models.ForeignKey(Material, verbose_name="Товар", null=True, on_delete=models.CASCADE, blank=False)
+    view_material = models.CharField("Вид товара", max_length=20, null=True, blank=True)
+    numb_seral = models.CharField("Номер инвентарной карты", max_length=20, null=True, blank=True)
+    face = models.CharField("Приянял МЦ", max_length=150, null=True, blank=True)
+    lifetime = models.PositiveIntegerField("Срок полезного использования (мес)", null=True, blank=True)
+    details = models.TextField("Описание составляющих и характеристик", null=True, blank=True)
+    transfer = models.CharField("Место эксплуатации", max_length=150, null=True, blank=True)
+    work = models.TextField("Описание работы", null=True, blank=True)
+
+    def __str__(self):
+        return self.material.title
+
